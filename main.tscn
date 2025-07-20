@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://qknp3f1s5gpb"]
+
+[ext_resource type="PackedScene" uid="uid://dvmu8swlbu2t3" path="res://assets/Character1.glb" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://mpor6jgd5h71" path="res://scenes/player.tscn" id="2_h2yge"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 5.37025e-08, -6.89839e-08, 0, 0.789084, 0.614285, 8.74228e-08, 0.614285, -0.789084, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1.8, 0, 0, 0, 1, 2, 1.06, 2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1.8, 0, 0, 0, 1, -2, 1.06, 2)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1.8, 0, 0, 0, 1, 2, 1.06, -2)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1.8, 0, 0, 0, 1, -2, 1.06, -2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(6.0192, 0, 0, 0, 0.4, 0, 0, 0, 5.814, 0, 0, 0)
+use_collision = true
+
+[node name="Character1" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 1.95, 0.2, -1.22)
+
+[node name="Player" parent="." instance=ExtResource("2_h2yge")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.2, 0)
