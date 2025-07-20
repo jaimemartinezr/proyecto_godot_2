@@ -9,6 +9,7 @@ var _camera_input_direction := Vector2.ZERO
 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _spring_arm: Node3D = %SpringArm3D
+@onready var _animation_player: AnimationPlayer = get_node("Character1/AnimationPlayer")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
@@ -19,6 +20,9 @@ func _input(event: InputEvent) -> void:
 		_spring_arm.spring_length -=1
 	if event.is_action_pressed("wheel_down"):
 		_spring_arm.spring_length +=1
+	if event.is_action_pressed("space"):
+		_animation_player.play("Wave")
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_notion := (
